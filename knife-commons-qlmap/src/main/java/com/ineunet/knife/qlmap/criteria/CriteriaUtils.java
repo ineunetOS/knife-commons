@@ -27,7 +27,7 @@ class CriteriaUtils {
 	/**
 	 * e.g. userName to user_name
 	 * Transform field name to sql column.<br>
-	 * (Not so fast.)
+	 * (TODO merge. Same function method is ClassStrUtils.hump2Underline)
 	 * e.g. userName to user_name
 	 * @param propName propName
 	 * @return prop_name

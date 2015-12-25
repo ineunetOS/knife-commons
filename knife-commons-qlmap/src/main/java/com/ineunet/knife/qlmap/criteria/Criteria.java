@@ -116,6 +116,9 @@ public class Criteria implements ICriteria {
 	private boolean namedParam = false;
 	
 	private String alias;
+	
+	private static final String restriction_isNull = Restrictors.getRestriction(RestrictType.isNull);
+	private static final String restriction_isNotNull = Restrictors.getRestriction(RestrictType.isNotNull);
 
 	/**
 	 * 查询映射实体
@@ -143,6 +146,12 @@ public class Criteria implements ICriteria {
 	 */
 	public Criteria(String table) {
 		sql = true;
+		queryString = new StringBuilder().append(table).append(" where 1=1");
+	}
+	
+	public Criteria(String table, boolean namedParam) {
+		sql = true;
+		this.namedParam = namedParam;
 		queryString = new StringBuilder().append(table).append(" where 1=1");
 	}
 	
@@ -228,11 +237,16 @@ public class Criteria implements ICriteria {
 	 */
 	private ICriteria addSimpleExpression(Restrictor criterion) {
 		SimpleRestrictor e = (SimpleRestrictor) criterion;
+		String restriction = e.getRestriction();
 		if (this.hasAlias()) {
 			queryString.append(this.alias).append(".");
 		}
 		queryString.append(e.getProperty());
-		queryString.append(e.getRestriction());
+		queryString.append(restriction);
+		if (restriction.equals(restriction_isNull) || restriction.equals(restriction_isNotNull)) {
+			return this;
+		}
+		
 		if (this.namedParam) {
 			queryString.append(VALUE_NAMED_SIGN).append(e.getProperty());
 			namedValues.put(e.getProperty().trim(), e.getValue());
@@ -315,6 +329,11 @@ public class Criteria implements ICriteria {
 	public String getCountString() {
 		return "select count(*) from " + queryString.toString();
 	}
+	
+	@Override
+	public String getDeleteString() {
+		return "delete from " + queryString.toString();
+	}
 
 	public Object[] getValues() {
 		return values.toArray();
@@ -337,6 +356,11 @@ public class Criteria implements ICriteria {
 
 	public boolean hasAlias() {
 		return StringUtils.isNotBlank(alias);
+	}
+	
+	@Override
+	public boolean isNamedParam() {
+		return namedParam;
 	}
 	
 	@Override

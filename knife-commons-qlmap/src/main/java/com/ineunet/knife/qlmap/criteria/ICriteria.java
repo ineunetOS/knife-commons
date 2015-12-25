@@ -36,6 +36,8 @@ public interface ICriteria {
 	
 	String getCountString();
 	
+	String getDeleteString();
+	
 	Object[] getValues();
 	
 	/**
@@ -54,5 +56,7 @@ public interface ICriteria {
 	 * @since 1.0.5
 	 */
 	String getAlias();
+	
+	boolean isNamedParam();
 	
 }

@@ -17,8 +17,8 @@ package com.ineunet.knife.qlmap.criteria;
 
 import java.util.List;
 
-import com.ineunet.knife.util.ISortedMap;
-import com.ineunet.knife.util.SortedMap;
+import com.ineunet.knife.util.collect.ISimpleMap;
+import com.ineunet.knife.util.collect.SortedMap;
 
 /**
  * 约束条件操作静态工厂，包括等于，不等于，大于，小于等@see {@link RestrictType}
@@ -60,6 +60,14 @@ public class Restrictors {
 
 	public static Restrictor iEq(String property, Object value) {
 		return new SimpleRestrictor(property, value, RestrictType.iEq);
+	}
+	
+	public static Restrictor isNull(String property) {
+		return new SimpleRestrictor(property, null, RestrictType.isNull);
+	}
+	
+	public static Restrictor isNotNull(String property) {
+		return new SimpleRestrictor(property, null, RestrictType.isNotNull);
 	}
 
 	public static Restrictor less(String property, Object value) {
@@ -115,7 +123,7 @@ public class Restrictors {
 		return new ExpressionRestrictor(property, nested, RestrictType.in);
 	}
 
-	private static final ISortedMap<RestrictType, String> RESTRICTION_NAME = new SortedMap<RestrictType, String>();
+	private static final ISimpleMap<RestrictType, String> RESTRICTION_NAME = new SortedMap<RestrictType, String>();
 	static {
 		RESTRICTION_NAME.put(RestrictType.eq, "=");
 		RESTRICTION_NAME.put(RestrictType.iEq, "!=");
@@ -138,7 +146,7 @@ public class Restrictors {
 	 * @since 1.2.4
 	 */
 	public static List<RestrictType> getRestricts() {
-		return RESTRICTION_NAME.keyList();
+		return (List<RestrictType>) RESTRICTION_NAME.keys();
 	}
 
 	public static final String getRestriction(RestrictType type) {
