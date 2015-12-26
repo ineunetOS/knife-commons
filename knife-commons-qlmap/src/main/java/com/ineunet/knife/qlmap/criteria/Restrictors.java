@@ -35,6 +35,9 @@ public class Restrictors {
 
 	/**
 	 * 对两个ICriterion进行 "逻辑与" 合并
+	 * @param c1 Restrictor left
+	 * @param c2 Restrictor right
+	 * @return Restrictor
 	 */
 	public static Restrictor and(Restrictor c1, Restrictor c2) {
 		return new LogicRestrictor(c1, c2, RestrictType.and);
@@ -42,6 +45,9 @@ public class Restrictors {
 
 	/**
 	 * 对两个ICriterion进行 "逻辑或" 合并
+	 * @param c1 Restrictor left
+	 * @param c2 Restrictor right
+	 * @return Restrictor
 	 */
 	public static Restrictor or(Restrictor c1, Restrictor c2) {
 		return new LogicRestrictor(c1, c2, RestrictType.or);
@@ -49,10 +55,9 @@ public class Restrictors {
 
 	/**
 	 * 按照值匹配某个属性
-	 * 
-	 * @param property
-	 * @param value
-	 * @return
+	 * @param property 属性名
+	 * @param value 熟悉值
+	 * @return Restrictor
 	 */
 	public static Restrictor eq(String property, Object value) {
 		return new SimpleRestrictor(property, value, RestrictType.eq);
@@ -113,11 +118,11 @@ public class Restrictors {
 	}
 
 	/**
-	 * @param property
-	 * @param nested
+	 * @param property 属性名
+	 * @param nested 嵌套子查询
 	 *            nested selection e.g. (select id from shop where shop_name
 	 *            like '%ads%')
-	 * @return
+	 * @return Restrictor
 	 */
 	public static Restrictor in(String property, String nested) {
 		return new ExpressionRestrictor(property, nested, RestrictType.in);
@@ -142,9 +147,6 @@ public class Restrictors {
 		RESTRICTION_NAME.put(RestrictType.or, "or");
 	}
 	
-	/**
-	 * @since 1.2.4
-	 */
 	public static List<RestrictType> getRestricts() {
 		return (List<RestrictType>) RESTRICTION_NAME.keys();
 	}

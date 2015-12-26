@@ -28,7 +28,7 @@ public interface ICriteria {
 	
 	/**
 	 * @param select such as <code>"id, name"</code>, or *
-	 * @return
+	 * @return criteria
 	 */
 	ICriteria setSelectColumns(String select);
 	
@@ -42,6 +42,7 @@ public interface ICriteria {
 	
 	/**
 	 * @since 1.0.5
+	 * @return map of named values
 	 */
 	Map<String, Object> getNamedValues();
 	

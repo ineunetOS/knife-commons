@@ -33,7 +33,7 @@ import com.ineunet.knife.util.StringUtils;
  * c.orderBy("shopName desc");<br>
  * c.limit(0, 10);<br>
  * System.out.println(c.queryString());<br>
- * : "from Criteria o where 1=1 and o.writeTime>=:writeTime and o.name like :name and o.sex=:sex order by o.shopName desc limit 0,10"
+ * : "from Criteria o where 1=1 and o.writeTime&gt;=:writeTime and o.name like :name and o.sex=:sex order by o.shopName desc limit 0,10"
  * </code>
  * <p>
  * 
@@ -47,7 +47,7 @@ import com.ineunet.knife.util.StringUtils;
  * c.orderBy("shopName desc");<br>
  * c.limit(0, 10);<br>
  * System.out.println(c.queryString());<br>
- * : "from Criteria o where 1=1 and o.writeTime>=:writeTime and o.name like :name and o.sex=:sex order by o.shopName desc limit 0,10"
+ * : "from Criteria o where 1=1 and o.writeTime&gt;=:writeTime and o.name like :name and o.sex=:sex order by o.shopName desc limit 0,10"
  * </code>
  * <p>
  * 
@@ -122,8 +122,7 @@ public class Criteria implements ICriteria {
 
 	/**
 	 * 查询映射实体
-	 * 
-	 * @param entityClass
+	 * @param entityClass 实体类型
 	 */
 	public Criteria(Class<?> entityClass) {
 		queryString = new StringBuilder().append(entityClass.getSimpleName()).append(" where 1=1");
@@ -141,8 +140,7 @@ public class Criteria implements ICriteria {
 
 	/**
 	 * 直接查询数据库
-	 * 
-	 * @param table
+	 * @param table 查询的表名
 	 */
 	public Criteria(String table) {
 		sql = true;
@@ -164,12 +162,13 @@ public class Criteria implements ICriteria {
 	
 	/**
 	 * Ignore when { null, empty String, 0 Long }
-	 * @since 2014-6-12
+	 * @param restrictor Restrictor
+	 * @return criteria
 	 */
 	@Override
-	public ICriteria addIfNotBlank(Restrictor criterion) {
-		if(criterion instanceof SimpleRestrictor) {
-			Object val = ((SimpleRestrictor) criterion).getValue();
+	public ICriteria addIfNotBlank(Restrictor restrictor) {
+		if(restrictor instanceof SimpleRestrictor) {
+			Object val = ((SimpleRestrictor) restrictor).getValue();
 			if(val == null) return this;
 			
 			if(val instanceof String) {
@@ -183,7 +182,7 @@ public class Criteria implements ICriteria {
 				if(valInteger == 0) return this;
 			}
 		}
-		return this.addRestrictor(criterion);
+		return this.addRestrictor(restrictor);
 	}
 
 	public ICriteria addRestrictor(Restrictor criterion) {
@@ -198,10 +197,6 @@ public class Criteria implements ICriteria {
 		return this;
 	}
 
-	/**
-	 * @author hilbert
-	 * @since 2014-2-7
-	 */
 	@Override
 	public ICriteria orderBy(String orderby) {
 		if(orderby == null || orderby.trim().length() == 0) return this;
@@ -257,10 +252,7 @@ public class Criteria implements ICriteria {
 		return this;
 	}
 	
-	/**
-	 * Like <code>SimpleExpression</code>. But not use <code>VALUE_PLACEHOLDER</code>
-	 * @since 2014-6-4
-	 */
+	// Like <code>SimpleExpression</code>. But not use <code>VALUE_PLACEHOLDER</code>
 	private ICriteria addExpressionCriterion(Restrictor criterion) {
 		ExpressionRestrictor e = (ExpressionRestrictor) criterion;
 		if (this.hasAlias()) {

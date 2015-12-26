@@ -19,7 +19,6 @@ package com.ineunet.knife.qlmap.criteria;
  * 约束条件枚举
  * @author 王旭
  * @since 2010-7-2
- *
  */
 public enum RestrictType {
 	/** 等于 <code>=</code> */
@@ -28,22 +27,21 @@ public enum RestrictType {
 	/** 不等于 <code>!=</code> */
 	iEq,
 
-	/** 小于 <code>&lt</code> */
+	/** 小于 <code>&lt;</code> */
 	less,
 
-	/** 大于 <code>&gt</code> */
+	/** 大于 <code>&gt;</code> */
 	more,
 
-	/** 小于等于 <code>&lt=</code> */
+	/** 小于等于 <code>&lt;=</code> */
 	lessEq,
 
-	/** 大于等于 <code>&gt=</code> */
+	/** 大于等于 <code>&gt;=</code> */
 	moreEq,
 
 	like, iLike, not, isNull, isNotNull,
 
 	and, or,
 
-	/** @since 1.2.0 */
 	in
 }
