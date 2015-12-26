@@ -5,17 +5,18 @@ import java.util.Set;
 
 /**
  * 为调用方便提供的纯静态方法类
- * @see {@link com.ineunet.knife.config.IConfig}
- * @author hilbert.wang@hotmail.com
+ * @see com.ineunet.knife.config.IConfig
+ * @author hilbert.wang@hotmail.com<br>
  * Created on 2015年12月4日
  */
 public final class KnifeConfig {
 	
 	private static IConfig knife;
-	
-	static void setKnifeConfig(IConfig knife) {
-		KnifeConfig.knife = knife;
+	static {
+		knife = ConfigFactory.getKnifeConfig();
 	}
+	
+	private KnifeConfig() {}
 
 	public static Boolean getBoolean(String name) {
 		return knife.getBoolean(name);

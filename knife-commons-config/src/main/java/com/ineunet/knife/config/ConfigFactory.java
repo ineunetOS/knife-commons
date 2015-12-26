@@ -23,8 +23,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 
- * @author Hilbert
- * 
+ * @author hilbert.wang@hotmail.com<br>
  */
 public class ConfigFactory {
 	private static final Logger logger = LoggerFactory.getLogger(ConfigFactory.class);
@@ -39,7 +38,6 @@ public class ConfigFactory {
 	private static void init() {
 		try {
 			knife = new ConfigImpl(propertiesDir + "knife.properties");
-			KnifeConfig.setKnifeConfig(knife);
 			configMap.clear();
 			configMap.put(ConfigType.knife.getValue(), knife);
 		} catch (Exception e) {
@@ -76,9 +74,8 @@ public class ConfigFactory {
 	}
 	
 	/**
-	 * @param propFile
-	 * @return
-	 * @since 1.2.1
+	 * @param propFile 配置文件类型
+	 * @return IConfig实例
 	 */
 	public static IConfig getConfig(ConfigType propFile) {
 		return getConfig(propFile.getValue());

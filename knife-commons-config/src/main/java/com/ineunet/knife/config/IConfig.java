@@ -20,10 +20,7 @@ import java.util.Set;
 
 /**
  * 
- * @author Hilbert
- * 
- * @since 1.0.0
- *
+ * @author hilbert.wang@hotmail.com<br>
  */
 public interface IConfig {
 	
@@ -35,11 +32,10 @@ public interface IConfig {
 	String get(String name, String defaultValue);
 	
 	/**
+	 * @param name key name
+	 * @param defaultValue default value of key <tt>name</tt>
+	 * @return int value of key <tt>name</tt>
 	 * @since 1.0.5
-	 * 
-	 * @param name
-	 * @param defaultValue
-	 * @return
 	 */
 	int get(String name, int defaultValue);
 

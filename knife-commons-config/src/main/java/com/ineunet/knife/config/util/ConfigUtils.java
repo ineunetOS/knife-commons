@@ -20,9 +20,7 @@ import java.util.Map;
 
 /**
  * 
- * @author Hilbert
- * 
- * @since 1.2.0
+ * @author hilbert.wang@hotmail.com<br>
  * 
  */
 public abstract class ConfigUtils {
@@ -30,8 +28,7 @@ public abstract class ConfigUtils {
 	/**
 	 * @param mapString
 	 *            like 'onl.com=onl, offl.com=offl, ineunet.com=home'
-	 * @return
-	 * @since 1.2.0
+	 * @return map of mapString configure
 	 */
 	public static Map<String, String> parseMapString(String mapString) {
 		return parseMapString(mapString, "=", false);
@@ -42,8 +39,8 @@ public abstract class ConfigUtils {
 	 *            like 'onl.com=onl, offl.com=offl, ineunet.com=home'
 	 * @param split
 	 *            e.g. '=', ':', ','
-	 * @return
-	 * @since 1.2.4
+	 * @param inverse true key is key, false value is key
+	 * @return map of mapString configure
 	 */
 	public static Map<String, String> parseMapString(String mapString, String split, boolean inverse) {
 		Map<String, String> map = new HashMap<String, String>();

@@ -17,7 +17,7 @@ package com.ineunet.knife.config;
 
 /**
  * 
- * @author Hilbert
+ * @author hilbert.wang@hotmail.com<br>
  * 
  */
 public class Configs {
@@ -30,15 +30,11 @@ public class Configs {
 	
 	/**
 	 * @return db type of sys-manager
-	 * @since 2.0.0
 	 */
 	public static String getSysDBType() {
 		return ConfigFactory.getKnifeConfig().get("db_type", "mysql");
 	}
 	
-	/**
-	 * @since 2.0.0
-	 */
 	public static boolean isMySql() {
 		if ("mysql".equals(getSysDBType())) {
 			return true;
@@ -46,9 +42,6 @@ public class Configs {
 		return false;
 	}
 	
-	/**
-	 * @since 2.0.0
-	 */
 	public static boolean isOracle() {
 		if ("oracle".equals(getSysDBType())) {
 			return true;
